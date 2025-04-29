@@ -1,9 +1,15 @@
+
 import { access, cp } from 'fs/promises';
 import { constants } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const copy = async () => {
-    const sourceDir = 'files';
-    const destDir = 'files_copy';
+    const sourceDir = path.join(__dirname, 'files');
+    const destDir = path.join(__dirname, 'files_copy');
 
     try {
         await access(sourceDir, constants.F_OK);

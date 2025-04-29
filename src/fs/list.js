@@ -1,13 +1,19 @@
 import { readdir, access } from 'fs/promises';
 import { constants } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const list = async () => {
-    const path = 'files';
+
+    const dir = path.join(__dirname, 'files');
 
     try {
-        await access(path, constants.F_OK);
+        await access(dir, constants.F_OK);
 
-        const files = await readdir(path);
+        const files = await readdir(dir);
 
         console.log(files);
     } catch (error) {
